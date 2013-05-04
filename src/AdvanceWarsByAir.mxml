@@ -5,4 +5,31 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			
+			public var ui:UIComponent = new UIComponent();
+			
+			public function runMe():void
+			{
+				
+				this.ui.width = 200;
+				this.ui.height = 200;
+				
+				//this.ui.addChild(AW.singleton);
+				this.addElement(ui);
+				
+				
+				this.ui.addEventListener(Event.ENTER_FRAME, startup);
+			}
+			
+			private function startup(evt:Event):void
+			{
+				this.ui.removeEventListener(Event.ENTER_FRAME, startup);
+				
+			}
+		]]>
+	</fx:Script>
 </s:WindowedApplication>
