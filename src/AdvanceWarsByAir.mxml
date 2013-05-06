@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
@@ -40,3 +41,47 @@
 		]]>
 	</fx:Script>
 </s:WindowedApplication>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   creationComplete="runMe()" width="1000" height="700">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import game.Game;
+			
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			
+			public var ui:UIComponent = new UIComponent();
+			public var mainGame:Game = new Game();
+			
+			public function runMe():void
+			{
+				
+				this.ui.width = 200;
+				this.ui.height = 200;
+				
+				//this.ui.addChild(AW.singleton);
+				this.addElement(this.ui);
+				this.ui.addChild(this.mainGame);
+				
+				
+				this.ui.addEventListener(Event.ENTER_FRAME, startup);
+			}
+			
+			private function startup(evt:Event):void
+			{
+				this.ui.removeEventListener(Event.ENTER_FRAME, startup);
+				
+				//程序入口
+				this.mainGame.startUp();
+			}
+		]]>
+	</fx:Script>
+</s:WindowedApplication>
+>>>>>>> master
