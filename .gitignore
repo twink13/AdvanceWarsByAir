@@ -165,3 +165,5 @@ pip-log.txt
 src/AdvanceWarsByAir-app.xml
 
 .actionScriptProperties
+
+bin-debug/AdvanceWarsByAir.swf
