@@ -167,3 +167,5 @@ src/AdvanceWarsByAir-app.xml
 .actionScriptProperties
 
 bin-debug/AdvanceWarsByAir.swf
+
+bin-debug/AdvanceWarsByAir-app.xml
