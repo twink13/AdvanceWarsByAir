@@ -6,6 +6,8 @@ package game
 	import flash.display.Sprite;
 	import flash.filesystem.File;
 	import flash.text.TextField;
+	
+	import game.controller.Controller;
 
 	/**
 	 * 维护人：twink 2013-5-6 - 今
@@ -14,6 +16,10 @@ package game
 	 */
 	public class Game extends Sprite
 	{
+		//游戏控制中心
+		public var controller:Controller = new Controller();
+		
+		
 		private var _fileReader:FileReader = new FileReader();//加载器
 		
 		public function Game()
@@ -27,14 +33,15 @@ package game
 		 */		
 		public function startUp():void
 		{
-			//var url:String = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
+			//测试加载配置文件
 			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
 			_fileReader.addListener(url, onRead);
 			_fileReader.read(url);
 			
-			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
-			_fileReader.addListener(url, onRead);
-			_fileReader.read(url);
+//			//测试加载图片资源
+//			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
+//			_fileReader.addListener(url, onRead);
+//			_fileReader.read(url);
 		}
 		
 		private function onRead(url:String, content:*):void
@@ -42,16 +49,33 @@ package game
 			_fileReader.removeListener(url, onRead);
 			if ( content is String )
 			{
-				var text:TextField = new TextField();
+//				var text:TextField = new TextField();
+//				
+//				text.text = content;
+//				text.x = 10;
+//				text.y = 10;
+//				text.width = 300;
+//				text.height = 300;
+//				
+//				this.addChild(text);
+//				trace(content);
 				
-				text.text = content;
-				text.x = 10;
-				text.y = 10;
-				text.width = 300;
-				text.height = 300;
+				var arr:Array = content.split("\n");
+				//trace(arr);
+				for ( var i:int = 0; i < arr.length; i++ )
+				{
+					arr[i] = arr[i].split("\t");
+				}
+				//trace(arr);
+				arr.shift();
+				this.controller.configParser.parseTerrainsConfig(arr);
 				
-				this.addChild(text);
-				trace(content);
+				for ( i = 0; i < 10; i ++ )
+				{
+					url = File.applicationDirectory.nativePath + "/image/terrain/" + arr[0][1] + ".gif";
+					_fileReader.addListener(url, onRead);
+					_fileReader.read(url);
+				}
 			}
 			else
 			{
