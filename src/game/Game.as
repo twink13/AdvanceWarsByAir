@@ -8,6 +8,7 @@ package game
 	import flash.text.TextField;
 	
 	import game.controller.Controller;
+	import game.view.View;
 
 	/**
 	 * 维护人：twink 2013-5-6 - 今
@@ -18,6 +19,8 @@ package game
 	{
 		//游戏控制中心
 		public var controller:Controller = new Controller();
+		//视图中心
+		public var view:View = new View();
 		
 		
 		private var _fileReader:FileReader = new FileReader();//加载器
