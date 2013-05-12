@@ -1,5 +1,6 @@
 package game.controller.config
 {
+	import game.Game;
 	import game.model.config.TerrainConfigData;
 
 	/**
@@ -29,6 +30,8 @@ package game.controller.config
 				
 				configData.typeID 				= dataItemArr[0];
 				configData.resourceBaseName 	= dataItemArr[1];
+				
+				Game.instance.model.configData.terrainConfigDataDic.addData(configData.typeID, configData);
 			}
 		}
 	}

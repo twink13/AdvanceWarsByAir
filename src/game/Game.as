@@ -8,6 +8,7 @@ package game
 	import flash.text.TextField;
 	
 	import game.controller.Controller;
+	import game.model.Model;
 	import game.view.View;
 
 	/**
@@ -17,9 +18,13 @@ package game
 	 */
 	public class Game extends Sprite
 	{
+		public static var instance:Game;
+		
+		//游戏数据中心
+		public var model:Model = new Model();
 		//游戏控制中心
 		public var controller:Controller = new Controller();
-		//视图中心
+		//游戏视图中心
 		public var view:View = new View();
 		
 		
@@ -28,6 +33,8 @@ package game
 		public function Game()
 		{
 			super();
+			
+			Game.instance = this;
 		}
 		
 		/**
