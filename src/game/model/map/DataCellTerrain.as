@@ -7,6 +7,9 @@ package game.model.map
 	 */
 	import com.twink.tools.data.DataCell;
 	
+	import game.Game;
+	import game.model.config.TerrainConfigData;
+	
 	public class DataCellTerrain extends DataCell
 	{
 		//地形类型ID
@@ -14,9 +17,9 @@ package game.model.map
 		//地形小类型/状态
 		private var _subType:String = null;
 		
-		public function DataCellTerrain($defaultVaule:*=null)
+		public function DataCellTerrain()
 		{
-			super($defaultVaule);
+			super(null);
 		}
 		
 		//=============================================================
@@ -78,6 +81,16 @@ package game.model.map
 		public function get subType():String
 		{
 			return _subType;
+		}
+		
+		/**
+		 * 获得当前地形对应的配置信息
+		 * @return 
+		 * 
+		 */		
+		public function get configData():TerrainConfigData
+		{
+			return Game.instance.model.configData.terrainConfigDataDic.getDataByID(this.typeID) as TerrainConfigData;
 		}
 	}
 }

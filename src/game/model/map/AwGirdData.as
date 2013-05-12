@@ -13,6 +13,8 @@ package game.model.map
 		//所在地图节点
 		private var _parent:MapNodeData;
 		
+		public var terrainData:DataCellTerrain = new DataCellTerrain();
+		
 		public function AwGirdData($parent:MapNodeData)
 		{
 			_parent = $parent;
