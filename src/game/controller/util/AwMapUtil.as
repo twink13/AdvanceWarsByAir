@@ -7,7 +7,7 @@ package game.controller.util
 	 * <p>
 	 * 各种工具接口
 	 */
-	public class AwUtils
+	public class AwMapUtil
 	{
 		/**
 		 * 通过小格和周围信息得到地形小类型
