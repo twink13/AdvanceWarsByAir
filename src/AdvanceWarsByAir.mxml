@@ -35,7 +35,7 @@
 				this.ui.removeEventListener(Event.ENTER_FRAME, startup);
 				
 				//程序入口
-				this.mainGame.startUp();
+				this.mainGame.loadConfig();
 			}
 		]]>
 	</fx:Script>

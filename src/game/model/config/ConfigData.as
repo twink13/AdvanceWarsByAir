@@ -15,5 +15,17 @@ package game.model.config
 		public function ConfigData()
 		{
 		}
+		
+		/**
+		 * 随机获得一个地形配置
+		 * @return 
+		 * 
+		 */		
+		public function getRandomTerrainConfig():TerrainConfigData
+		{
+			var list:Array = this.terrainConfigDataDic.dataArrData.arr;
+			var randomNum:int = int(Math.random() * list.length);
+			return list[randomNum];
+		}
 	}
 }

@@ -3,6 +3,8 @@ package game
 	import com.twink.tools.air.file.FileReader;
 	import com.twink.tools.game.slg.map.MapData2D;
 	import com.twink.tools.game.slg.map.MapNodeData2D;
+	import com.twink.tools.load.ReaderData;
+	import com.twink.tools.load.ReaderTypes;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -40,11 +42,19 @@ package game
 			Game.instance = this;
 		}
 		
+		public function loadConfig():void
+		{
+			//测试加载配置文件
+			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
+			this.controller.reader.addListener(url, onRead);
+			this.controller.reader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
+		}
+		
 		/**
 		 * 游戏启动入口
 		 * 
 		 */		
-		public function startUp():void
+		public function startGame():void
 		{
 			var map:MapData2D = new MapData2D();
 			map.setUp(10, 10);
@@ -57,12 +67,10 @@ package game
 				var grid:AwGirdData = new AwGirdData(node);
 				
 				node.content = grid;
+				
+				//随机设置一个已有的地形
+				grid.terrainData.typeID = Game.instance.model.configData.getRandomTerrainConfig().typeID;
 			}
-			
-			//测试加载配置文件
-			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
-			_fileReader.addListener(url, onRead);
-			_fileReader.read(url);
 			
 //			//测试加载图片资源
 //			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
@@ -70,9 +78,10 @@ package game
 //			_fileReader.read(url);
 		}
 		
-		private function onRead(url:String, content:*):void
+		private function onRead($readerData:ReaderData):void
 		{
-			_fileReader.removeListener(url, onRead);
+			var content:* = $readerData.contentData.value
+			this.controller.reader.removeListener($readerData.url, onRead);
 			if ( content is String )
 			{
 				var arr:Array = content.split("\n");
@@ -87,9 +96,9 @@ package game
 				
 				for ( i = 0; i < 10; i ++ )
 				{
-					url = File.applicationDirectory.nativePath + "/image/terrain/" + arr[0][1] + ".gif";
-					_fileReader.addListener(url, onRead);
-					_fileReader.read(url);
+					$readerData.url = File.applicationDirectory.nativePath + "/image/terrain/" + arr[0][1] + ".gif";
+					this.controller.reader.addListener($readerData.url, onRead);
+					this.controller.reader.read($readerData.url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
 				}
 			}
 			else

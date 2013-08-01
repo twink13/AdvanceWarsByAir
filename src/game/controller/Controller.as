@@ -1,5 +1,8 @@
 package game.controller
 {
+	import com.twink.tools.library.Library;
+	import com.twink.tools.load.Reader;
+	
 	import game.controller.config.ConfigParser;
 
 	/**
@@ -9,11 +12,17 @@ package game.controller
 	 */
 	public class Controller
 	{
+		//资源存储器
+		public var library:Library = new Library();
+		//文件加载器
+		public var reader:Reader = new Reader(3);
+		
 		//配置文件解析器
 		public var configParser:ConfigParser = new ConfigParser();
 		
 		public function Controller()
 		{
+			reader.setLibrary(library);
 		}
 	}
 }
