@@ -1,6 +1,5 @@
 package game
 {
-	import com.twink.tools.air.file.FileReader;
 	import com.twink.tools.game.slg.map.MapData2D;
 	import com.twink.tools.game.slg.map.MapNodeData2D;
 	import com.twink.tools.load.ReaderData;
@@ -26,9 +25,6 @@ package game
 		
 		//游戏系统相关
 		public var system:GameSystem = new GameSystem();
-		
-		
-		private var _fileReader:FileReader = new FileReader();//加载器
 		
 		public function Game()
 		{
