@@ -1,4 +1,4 @@
-package game.model.map
+package game.system.model.map
 {
 	/**
 	 * created by twink @ 2013-5-12 下午3:33:13
@@ -8,7 +8,7 @@ package game.model.map
 	import com.twink.tools.data.DataCell;
 	
 	import game.Game;
-	import game.model.config.TerrainConfigData;
+	import game.system.model.config.TerrainConfigData;
 	
 	public class DataCellTerrain extends DataCell
 	{
@@ -90,7 +90,7 @@ package game.model.map
 		 */		
 		public function get configData():TerrainConfigData
 		{
-			return Game.instance.model.configData.terrainConfigDataDic.getDataByID(this.typeID) as TerrainConfigData;
+			return Game.instance.system.model.configData.terrainConfigDataDic.getDataByID(this.typeID) as TerrainConfigData;
 		}
 	}
 }

@@ -1,6 +1,6 @@
-package game.controller.util
+package game.util
 {
-	import game.model.map.AwGirdData;
+	import game.system.model.map.AwGirdData;
 
 	/**
 	 * created by twink @ 2013-5-12 下午6:41:10

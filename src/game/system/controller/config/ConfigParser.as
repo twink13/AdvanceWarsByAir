@@ -1,7 +1,7 @@
-package game.controller.config
+package game.system.controller.config
 {
 	import game.Game;
-	import game.model.config.TerrainConfigData;
+	import game.system.model.config.TerrainConfigData;
 
 	/**
 	 * created by twink @ 2013-5-8 下午10:03:18
@@ -31,7 +31,7 @@ package game.controller.config
 				configData.typeID 				= dataItemArr[0];
 				configData.resourceBaseName 	= dataItemArr[1];
 				
-				Game.instance.model.configData.terrainConfigDataDic.addData(configData.typeID, configData);
+				Game.instance.system.model.configData.terrainConfigDataDic.addData(configData.typeID, configData);
 			}
 		}
 	}

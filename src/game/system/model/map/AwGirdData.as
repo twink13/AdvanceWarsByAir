@@ -1,4 +1,4 @@
-package game.model.map
+package game.system.model.map
 {
 	/**
 	 * created by twink @ 2013-5-12 下午3:30:02

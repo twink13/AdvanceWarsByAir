@@ -1,4 +1,4 @@
-package game.model.consts
+package game.system.model.consts
 {
 	/**
 	 * 维护人：车征 2013-5-4 - 今

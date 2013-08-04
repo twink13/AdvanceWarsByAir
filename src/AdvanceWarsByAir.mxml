@@ -18,6 +18,7 @@
 			
 			public function runMe():void
 			{
+				this.mainGame.init();
 				
 				this.ui.width = 200;
 				this.ui.height = 200;

@@ -9,12 +9,11 @@ package game
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.filesystem.File;
+	import flash.system.System;
 	import flash.text.TextField;
 	
-	import game.controller.Controller;
-	import game.model.Model;
-	import game.model.map.AwGirdData;
-	import game.view.View;
+	import game.system.model.map.AwGirdData;
+	import game.system.GameSystem;
 
 	/**
 	 * 维护人：twink 2013-5-6 - 今
@@ -25,12 +24,8 @@ package game
 	{
 		public static var instance:Game;
 		
-		//游戏数据中心
-		public var model:Model = new Model();
-		//游戏控制中心
-		public var controller:Controller = new Controller();
-		//游戏视图中心
-		public var view:View = new View();
+		//游戏系统相关
+		public var system:GameSystem = new GameSystem();
 		
 		
 		private var _fileReader:FileReader = new FileReader();//加载器
@@ -42,12 +37,21 @@ package game
 			Game.instance = this;
 		}
 		
+		/**
+		 * 总初始化接口
+		 * 
+		 */		
+		public function init():void
+		{
+			this.system.init();
+		}
+		
 		public function loadConfig():void
 		{
 			//测试加载配置文件
 			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
-			this.controller.reader.addListener(url, onRead);
-			this.controller.reader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
+			this.system.controller.mainReader.addListener(url, onRead);
+			this.system.controller.mainReader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
 		}
 		
 		/**
@@ -69,7 +73,7 @@ package game
 				node.content = grid;
 				
 				//随机设置一个已有的地形
-				grid.terrainData.typeID = Game.instance.model.configData.getRandomTerrainConfig().typeID;
+				grid.terrainData.typeID = Game.instance.system.model.configData.getRandomTerrainConfig().typeID;
 			}
 			
 //			//测试加载图片资源
@@ -81,7 +85,7 @@ package game
 		private function onRead($readerData:ReaderData):void
 		{
 			var content:* = $readerData.contentData.value
-			this.controller.reader.removeListener($readerData.url, onRead);
+			this.system.controller.mainReader.removeListener($readerData.url, onRead);
 			if ( content is String )
 			{
 				var arr:Array = content.split("\n");
@@ -92,13 +96,13 @@ package game
 				}
 				//trace(arr);
 				arr.shift();
-				this.controller.configParser.parseTerrainsConfig(arr);
+				this.system.controller.configParser.parseTerrainsConfig(arr);
 				
 				for ( i = 0; i < 10; i ++ )
 				{
 					$readerData.url = File.applicationDirectory.nativePath + "/image/terrain/" + arr[0][1] + ".gif";
-					this.controller.reader.addListener($readerData.url, onRead);
-					this.controller.reader.read($readerData.url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
+					this.system.controller.mainReader.addListener($readerData.url, onRead);
+					this.system.controller.mainReader.read($readerData.url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
 				}
 			}
 			else

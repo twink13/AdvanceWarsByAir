@@ -1,4 +1,4 @@
-package game.model.config
+package game.system.model.config
 {
 	import com.twink.tools.data.DataCellTags;
 

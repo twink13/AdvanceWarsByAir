@@ -1,4 +1,4 @@
-package game.view.map
+package game.system.view.map
 {
 	/**
 	 * created by twink @ 2013-5-11 下午4:52:12
@@ -10,7 +10,7 @@ package game.view.map
 	
 	import flash.display.Sprite;
 	
-	import game.model.consts.MainConst;
+	import game.system.model.consts.MainConst;
 	
 	public class MapDisplay extends Sprite
 	{

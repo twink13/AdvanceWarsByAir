@@ -1,4 +1,4 @@
-package game.model.consts
+package game.system.model.consts
 {
 	/**
 	 * created by twink @ 2013-5-11 下午5:00:55

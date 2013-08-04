@@ -1,6 +1,6 @@
-package game.model.terrain
+package game.system.model.terrain
 {
-	import game.model.consts.Dir;
+	import game.system.model.consts.Dir;
 
 	/**
 	 * 维护人：车征 2013-5-4 - 今
