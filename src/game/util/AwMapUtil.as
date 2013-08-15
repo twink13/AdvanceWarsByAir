@@ -1,6 +1,6 @@
 package game.util
 {
-	import game.system.model.map.AwGirdData;
+	import game.sub.map.model.map.AwGirdData;
 
 	/**
 	 * created by twink @ 2013-5-12 下午6:41:10

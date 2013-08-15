@@ -2,6 +2,8 @@ package game.system.controller.config
 {
 	import game.Game;
 	import game.system.model.config.TerrainConfigData;
+	import game.system.model.consts.MainConst;
+	import game.util.ConfigUtil;
 
 	/**
 	 * created by twink @ 2013-5-8 下午10:03:18
@@ -30,6 +32,14 @@ package game.system.controller.config
 				
 				configData.typeID 				= dataItemArr[0];
 				configData.resourceBaseName 	= dataItemArr[1];
+				
+				var tags:Array = ConfigUtil.getArrByStr(dataItemArr[2], MainConst.DELIM_CONFIG_ARR);
+				for each( var tag:String in tags )
+				{
+					configData.tags.addTag(tag);
+				}
+				
+				configData.relatedTerrainTypeID 	= dataItemArr[3];
 				
 				Game.instance.system.model.configData.terrainConfigDataDic.addData(configData.typeID, configData);
 			}

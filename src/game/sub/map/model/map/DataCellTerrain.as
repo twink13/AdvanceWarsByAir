@@ -1,4 +1,4 @@
-package game.system.model.map
+package game.sub.map.model.map
 {
 	/**
 	 * created by twink @ 2013-5-12 下午3:33:13
@@ -9,6 +9,7 @@ package game.system.model.map
 	
 	import game.Game;
 	import game.system.model.config.TerrainConfigData;
+	import game.system.model.consts.Urls;
 	
 	public class DataCellTerrain extends DataCell
 	{

@@ -17,6 +17,8 @@ package game.system.model.config
 		public var defence:int;
 		//标签
 		public var tags:DataCellTags = new DataCellTags();
+		//相关联的地形类型编号
+		public var relatedTerrainTypeID:String;
 		
 		public function TerrainConfigData()
 		{

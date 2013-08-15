@@ -2,6 +2,7 @@ package game
 {
 	import com.twink.tools.game.slg.map.MapData2D;
 	import com.twink.tools.game.slg.map.MapNodeData2D;
+	import com.twink.tools.load.Reader;
 	import com.twink.tools.load.ReaderData;
 	import com.twink.tools.load.ReaderTypes;
 	
@@ -11,8 +12,11 @@ package game
 	import flash.system.System;
 	import flash.text.TextField;
 	
-	import game.system.model.map.AwGirdData;
+	import game.sub.map.Map;
+	import game.sub.map.model.map.AwGirdData;
 	import game.system.GameSystem;
+	import game.system.controller.config.ConfigReader;
+	import game.system.model.config.TerrainConfigData;
 
 	/**
 	 * 维护人：twink 2013-5-6 - 今
@@ -25,6 +29,8 @@ package game
 		
 		//游戏系统相关
 		public var system:GameSystem = new GameSystem();
+		//地图
+		public var map:Map = new Map();
 		
 		public function Game()
 		{
@@ -42,13 +48,13 @@ package game
 			this.system.init();
 		}
 		
-		public function loadConfig():void
-		{
-			//测试加载配置文件
-			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
-			this.system.controller.mainReader.addListener(url, onRead);
-			this.system.controller.mainReader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
-		}
+//		public function loadConfig():void
+//		{
+//			//测试加载配置文件
+//			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
+//			this.system.controller.mainReader.addListener(url, onRead);
+//			this.system.controller.mainReader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
+//		}
 		
 		/**
 		 * 游戏启动入口
@@ -56,8 +62,20 @@ package game
 		 */		
 		public function startGame():void
 		{
+			this.system.controller.configReader.startRead(onConfigComplete);
+			
+			
+			
+//			//测试加载图片资源
+//			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
+//			_fileReader.addListener(url, onRead);
+//			_fileReader.read(url);
+		}
+		
+		private function onConfigComplete():void
+		{
 			var map:MapData2D = new MapData2D();
-			map.setUp(10, 10);
+			map.setUp(20, 20);
 			
 			var list:Array = map.nodeList();
 			var size:int = list.length;
@@ -69,19 +87,16 @@ package game
 				node.content = grid;
 				
 				//随机设置一个已有的地形
-				grid.terrainData.typeID = Game.instance.system.model.configData.getRandomTerrainConfig().typeID;
+				var terrainConfig:TerrainConfigData = Game.instance.system.model.configData.getRandomTerrainConfig();
+				grid.terrainData.typeID = terrainConfig.typeID;
+				trace("terrainConfig.typeID = " + terrainConfig.typeID);
 			}
-			
-//			//测试加载图片资源
-//			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
-//			_fileReader.addListener(url, onRead);
-//			_fileReader.read(url);
+			Game.instance.map.view.mapUI.openWithMapData(map);
 		}
 		
 		private function onRead($readerData:ReaderData):void
 		{
-			var content:* = $readerData.contentData.value
-			this.system.controller.mainReader.removeListener($readerData.url, onRead);
+			var content:* = $readerData.contentData.value;
 			if ( content is String )
 			{
 				var arr:Array = content.split("\n");

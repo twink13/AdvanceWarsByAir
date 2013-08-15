@@ -18,6 +18,19 @@ package game.system.model.consts
 		public static function getConfigUrl($configName:String):String
 		{
 			var url:String = File.applicationDirectory.nativePath + "/config/" + $configName;
+			return url;
+		}
+		
+		/**
+		 * 获得地形资源路径路径
+		 * @param $imageName 图片文件名
+		 * @return 
+		 * 
+		 */		
+		public static function getTerrainImageUrl($imageName:String):String
+		{
+			var url:String = File.applicationDirectory.nativePath + "/image/terrain/" + $imageName + ".gif";
+			return url;
 		}
 	}
 }

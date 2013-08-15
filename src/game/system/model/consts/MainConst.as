@@ -9,5 +9,7 @@ package game.system.model.consts
 	{
 		public static const PIXL_GRID_WIDTH:int 	= 16;	//小格宽度
 		public static const PIXL_GRID_HEIGHT:int 	= 16;	//小格高度
+		
+		public static const DELIM_CONFIG_ARR:String = ",";	//配置文件数组分隔符
 	}
 }
