@@ -14,6 +14,7 @@ package game
 	
 	import game.sub.map.Map;
 	import game.sub.map.model.map.AwGirdData;
+	import game.sub.mapEditer.MapEditer;
 	import game.system.GameSystem;
 	import game.system.controller.config.ConfigReader;
 	import game.system.model.config.TerrainConfigData;
@@ -31,6 +32,8 @@ package game
 		public var system:GameSystem = new GameSystem();
 		//地图
 		public var map:Map = new Map();
+		//地图编辑器
+		public var mapEditer:MapEditer = new MapEditer();
 		
 		public function Game()
 		{
