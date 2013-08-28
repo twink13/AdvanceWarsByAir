@@ -8,13 +8,23 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import controller.MainController;
+			
 			import game.Game;
+			
+			import model.MainModel;
 			
 			import mx.controls.Alert;
 			import mx.core.UIComponent;
 			
+			import view.MainView;
+			
 			public var ui:UIComponent = new UIComponent();
 			public var mainGame:Game = new Game();
+			
+			private var _model:MainModel = new MainModel();
+			private var _controller:MainController = new MainController(_model);
+			private var _view:MainView = new MainView(_controller);
 			
 			public function runMe():void
 			{
@@ -36,7 +46,10 @@
 				this.ui.removeEventListener(Event.ENTER_FRAME, startup);
 				
 				//程序入口
-				this.mainGame.startGame();
+				//this.mainGame.startGame();
+				
+				//新程序入口
+				_controller.start();
 			}
 		]]>
 	</fx:Script>
