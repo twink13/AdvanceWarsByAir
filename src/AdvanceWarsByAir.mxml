@@ -17,6 +17,8 @@
 			import mx.controls.Alert;
 			import mx.core.UIComponent;
 			
+			import test.Test;
+			
 			import view.MainView;
 			
 			public var ui:UIComponent = new UIComponent();
@@ -25,17 +27,16 @@
 			private var _model:MainModel = new MainModel();
 			private var _controller:MainController = new MainController(_model);
 			private var _view:MainView = new MainView(_controller);
+			private var _test:Test = new Test();
 			
 			public function runMe():void
 			{
-				this.mainGame.init();
-				
 				this.ui.width = 200;
 				this.ui.height = 200;
 				
 				//this.ui.addChild(AW.singleton);
 				this.addElement(this.ui);
-				this.ui.addChild(this.mainGame);
+				this.ui.addChild(_view.container);
 				
 				
 				this.ui.addEventListener(Event.ENTER_FRAME, startup);
@@ -45,9 +46,20 @@
 			{
 				this.ui.removeEventListener(Event.ENTER_FRAME, startup);
 				
-				//程序入口
-				//this.mainGame.startGame();
-				
+				if ( Configer.HAVE_TEST )
+				{
+					//执行测试程序
+					_test.addListener(Test.TEST_COMPLETE, onTestComplete);
+					_test.start();
+				}
+				else
+				{
+					this.onTestComplete();
+				}
+			}
+			
+			private function onTestComplete():void
+			{
 				//新程序入口
 				_controller.start();
 			}

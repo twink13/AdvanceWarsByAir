@@ -12,12 +12,8 @@ package game
 	import flash.system.System;
 	import flash.text.TextField;
 	
-	import game.sub.map.Map;
-	import game.sub.map.model.map.AwGirdData;
-	import game.sub.mapEditer.MapEditer;
-	import game.system.GameSystem;
-	import game.system.controller.config.ConfigReader;
-	import game.system.model.config.TerrainConfigData;
+	import controller.map.AwGirdData;
+	import controller.config.terrain.TerrainConfigData;
 
 	/**
 	 * 维护人：twink 2013-5-6 - 今
@@ -28,51 +24,11 @@ package game
 	{
 		public static var instance:Game;
 		
-		//游戏系统相关
-		public var system:GameSystem = new GameSystem();
-		//地图
-		public var map:Map = new Map();
-		//地图编辑器
-		public var mapEditer:MapEditer = new MapEditer();
-		
 		public function Game()
 		{
 			super();
 			
 			Game.instance = this;
-		}
-		
-		/**
-		 * 总初始化接口
-		 * 
-		 */		
-		public function init():void
-		{
-			this.system.init();
-		}
-		
-//		public function loadConfig():void
-//		{
-//			//测试加载配置文件
-//			var url:String = File.applicationDirectory.nativePath + "/config/terrains.txt";
-//			this.system.controller.mainReader.addListener(url, onRead);
-//			this.system.controller.mainReader.read(url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_TXT);
-//		}
-		
-		/**
-		 * 游戏启动入口
-		 * 
-		 */		
-		public function startGame():void
-		{
-			this.system.controller.configReader.startRead(onConfigComplete);
-			
-			
-			
-//			//测试加载图片资源
-//			url = File.applicationDirectory.nativePath + "/image/terrain/" + "croad" + ".gif";
-//			_fileReader.addListener(url, onRead);
-//			_fileReader.read(url);
 		}
 		
 		private function onConfigComplete():void
@@ -90,11 +46,11 @@ package game
 				node.content = grid;
 				
 				//随机设置一个已有的地形
-				var terrainConfig:TerrainConfigData = Game.instance.system.model.configData.getRandomTerrainConfig();
-				grid.terrainData.typeID = terrainConfig.typeID;
-				trace("terrainConfig.typeID = " + terrainConfig.typeID);
+				//var terrainConfig:TerrainConfigData = Game.instance.system.model.configData.getRandomTerrainConfig();
+				//grid.terrainData.typeID = terrainConfig.typeID;
+				//trace("terrainConfig.typeID = " + terrainConfig.typeID);
 			}
-			Game.instance.map.view.mapUI.openWithMapData(map);
+			//Game.instance.map.view.mapUI.openWithMapData(map);
 		}
 		
 		private function onRead($readerData:ReaderData):void
@@ -110,13 +66,13 @@ package game
 				}
 				//trace(arr);
 				arr.shift();
-				this.system.controller.configParser.parseTerrainsConfig(arr);
+				//this.system.controller.configParser.parseTerrainsConfig(arr);
 				
 				for ( i = 0; i < 10; i ++ )
 				{
 					$readerData.url = File.applicationDirectory.nativePath + "/image/terrain/" + arr[0][1] + ".gif";
-					this.system.controller.mainReader.addListener($readerData.url, onRead);
-					this.system.controller.mainReader.read($readerData.url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
+					//this.system.controller.mainReader.addListener($readerData.url, onRead);
+					//this.system.controller.mainReader.read($readerData.url, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
 				}
 			}
 			else
