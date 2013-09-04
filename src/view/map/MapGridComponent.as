@@ -6,7 +6,6 @@ package view.map
 	import com.twink.tools.load.ReaderData;
 	import com.twink.tools.load.ReaderTypes;
 	
-	import controller.consts.Consts;
 	import controller.map.AwGirdData;
 	
 	import flash.display.Bitmap;
@@ -16,6 +15,7 @@ package view.map
 	import game.Game;
 	
 	import view.MainView;
+	import view.consts.ViewConsts;
 
 	/**
 	 * created by twink @ 2013-8-10 下午2:40:41
@@ -65,7 +65,7 @@ package view.map
 			MainView.instance.removeListener(_gridData.imageUrl, onImageRead);
 			_imageContent = new Bitmap($readerData.contentData.value);
 			
-			_imageContent.y = Consts.PIXL_GRID_HEIGHT - _imageContent.height;
+			_imageContent.y = ViewConsts.PIXL_GRID_HEIGHT - _imageContent.height;
 			
 			(this.display as DisplayObjectContainer).addChild(_imageContent);
 		}

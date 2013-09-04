@@ -10,7 +10,6 @@ package view.map
 	import com.twink.tools.game.slg.map.MapData2D;
 	import com.twink.tools.game.slg.map.MapNodeData2D;
 	
-	import controller.consts.Consts;
 	import controller.map.AwGirdData;
 	
 	import flash.display.DisplayObject;
@@ -21,6 +20,7 @@ package view.map
 	import game.Game;
 	
 	import view.MainView;
+	import view.consts.ViewConsts;
 	
 	public class MapComponent extends Component
 	{
@@ -56,8 +56,8 @@ package view.map
 				var gridData:AwGirdData = node.content as AwGirdData;
 				
 				var sp:Sprite = new Sprite();
-				sp.x = node.position.x * Consts.PIXL_GRID_WIDTH;
-				sp.y = node.position.y * Consts.PIXL_GRID_HEIGHT;
+				sp.x = node.position.x * ViewConsts.PIXL_GRID_WIDTH;
+				sp.y = node.position.y * ViewConsts.PIXL_GRID_HEIGHT;
 				(this.display as DisplayObjectContainer).addChild(sp);
 				
 				var gridComponent:MapGridComponent = new MapGridComponent();
