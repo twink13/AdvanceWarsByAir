@@ -7,6 +7,8 @@ package controller
 	
 	import controller.config.terrain.TerrainConfigData;
 	import controller.config.terrain.TerrainConfigParser;
+	import controller.consts.GameModes;
+	import controller.data.SystemData;
 	import controller.map.AwGirdData;
 	import controller.util.ControllerLog;
 	
@@ -32,6 +34,8 @@ package controller
 		//数据模块
 		private var _model:MainModel;
 		
+		//系统信息
+		public var systemData:SystemData = new SystemData();
 		//地形配置文件
 		public var terrainConfigParser:TerrainConfigParser = new TerrainConfigParser();
 		
@@ -68,6 +72,7 @@ package controller
 		public function enterEditMode():void
 		{
 			ControllerLog.addLog("进入编辑器模式! ");
+			this.systemData.gameModeData.value = GameModes.EDIT;
 			
 			//这里先打开一个默认的UI
 			var map:MapData2D = new MapData2D();
