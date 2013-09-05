@@ -9,7 +9,7 @@ package controller.util
 	 * <p>
 	 * 编辑器的工厂类
 	 */
-	public class EditFactory
+	public class EditorFactory
 	{
 		/**
 		 * 生成可选择的地形列表
