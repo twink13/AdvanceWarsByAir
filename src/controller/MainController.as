@@ -92,6 +92,10 @@ package controller
 				grid.terrainData.typeID = terrainConfig.typeID;
 				trace("terrainConfig.typeID = " + terrainConfig.typeID);
 			}
+			
+			//生成可操控的地形列表
+			var terrainList:Array = [];
+			
 			this.send(MainController.EDIT_CREATE_MAP, map);
 		}
 		
