@@ -9,7 +9,7 @@ package view
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
-	import view.UI.MapEditerUI;
+	import view.UI.MapEditorUI;
 	import view.consts.ViewMessages;
 	import view.map.MapComponent;
 	import view.util.ViewLog;
@@ -25,7 +25,7 @@ package view
 		public static var instance:MainView;
 		
 		//地图编辑器UI
-		public var mapEditerUI:MapEditerUI = new MapEditerUI();
+		public var mapEditorUI:MapEditorUI = new MapEditorUI();
 		
 		//存储的控制器
 		private var _controller:MainController;
@@ -113,7 +113,7 @@ package view
 		private function onEditCreateMap($mapData:MapData2D):void
 		{
 			ViewLog.addLog("收到编辑器的默认地图! ");
-			this.mapEditerUI.open($mapData);
+			this.mapEditorUI.open($mapData);
 		}
 		
 		//单个普通文件加载完毕

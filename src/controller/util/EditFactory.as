@@ -1,5 +1,7 @@
 package controller.util
 {
+	import controller.consts.TerrainSubTypes;
+	import controller.consts.Terrains;
 	import controller.map.AwGirdData;
 
 	/**
@@ -11,14 +13,16 @@ package controller.util
 	{
 		/**
 		 * 生成可选择的地形列表
-		 * @return 
+		 * @return [AwGirdData列表]
 		 * 
 		 */		
 		public static function createCanEditTerrainList():Array
 		{
 			var result:Array = [];
 			
-			result.push(createTerrainGrid());
+			result.push(createTerrainGrid(Terrains.PLAIN, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.MOUNTAIN, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.SEA, TerrainSubTypes.NONE));
 			
 			return result;
 		}

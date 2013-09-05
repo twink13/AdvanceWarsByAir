@@ -13,13 +13,13 @@ package view.UI
 	 * <p>
 	 * 地图编辑器UI
 	 */
-	public class MapEditerUI
+	public class MapEditorUI
 	{
 		//private var _container:Sprite = null;
 		
 		private var _mapCompoent:MapComponent = null;
 		
-		public function MapEditerUI()
+		public function MapEditorUI()
 		{
 		}
 		
