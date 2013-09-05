@@ -97,6 +97,16 @@ package view
 			_controller.read($url, $sourceType, $fileType, $saveToLibrary, $priority);
 		}
 		
+		/**
+		 * 返回主控制器
+		 * @return 
+		 * 
+		 */		
+		public function get controller():MainController
+		{
+			return _controller;
+		}
+		
 		//======================================================
 		//私有处理
 		//======================================================
@@ -110,10 +120,10 @@ package view
 		}
 		
 		//显示编辑器默认地图
-		private function onEditCreateMap($mapData:MapData2D):void
+		private function onEditCreateMap($mapData:MapData2D, $canEditTerrainList:Array):void
 		{
 			ViewLog.addLog("收到编辑器的默认地图! ");
-			this.mapEditorUI.open($mapData);
+			this.mapEditorUI.open($mapData, $canEditTerrainList);
 		}
 		
 		//单个普通文件加载完毕

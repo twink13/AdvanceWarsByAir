@@ -4,6 +4,7 @@ package controller.config.terrain
 	
 	import controller.consts.Consts;
 	import controller.util.ConfigUtil;
+	import controller.util.ControllerLog;
 	
 
 	/**
@@ -44,6 +45,8 @@ package controller.config.terrain
 				}
 				
 				configData.relatedTerrainTypeID 	= dataItemArr[3];
+				
+				ControllerLog.addLog("解析得到地形配置! configData.typeID = " + configData.typeID);
 				
 				this.terrainConfigDataDic.addData(configData.typeID, configData);
 			}

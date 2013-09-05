@@ -11,8 +11,6 @@ package controller.data
 	 */
 	public class SystemData
 	{
-		//游戏模式
-		public var gameModeData:DataCell = new DataCell(GameModes.NONE);
 		
 		public function SystemData()
 		{

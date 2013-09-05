@@ -61,7 +61,8 @@ package view.map
 				(this.display as DisplayObjectContainer).addChild(sp);
 				
 				var gridComponent:MapGridComponent = new MapGridComponent();
-				gridComponent.relateWithData(sp, gridData);
+				gridComponent.setData(gridData);
+				gridComponent.relate(sp);
 				
 				_grids.push(gridComponent);
 			}

@@ -9,8 +9,10 @@ package controller
 	import controller.config.terrain.TerrainConfigParser;
 	import controller.consts.GameModes;
 	import controller.data.SystemData;
+	import controller.gameplay.GameplayManager;
 	import controller.map.AwGirdData;
 	import controller.util.ControllerLog;
+	import controller.util.EditorFactory;
 	
 	import model.MainModel;
 
@@ -38,6 +40,8 @@ package controller
 		public var systemData:SystemData = new SystemData();
 		//地形配置文件
 		public var terrainConfigParser:TerrainConfigParser = new TerrainConfigParser();
+		//玩法相关模块
+		public var gameplayManager:GameplayManager = new GameplayManager();
 		
 		public function MainController($model:MainModel)
 		{
@@ -72,7 +76,7 @@ package controller
 		public function enterEditMode():void
 		{
 			ControllerLog.addLog("进入编辑器模式! ");
-			this.systemData.gameModeData.value = GameModes.EDIT;
+			this.gameplayManager.enterEditorMode();
 			
 			//这里先打开一个默认的UI
 			var map:MapData2D = new MapData2D();
@@ -90,13 +94,13 @@ package controller
 				//随机设置一个已有的地形
 				var terrainConfig:TerrainConfigData = this.terrainConfigParser.getRandomTerrainConfig();
 				grid.terrainData.typeID = terrainConfig.typeID;
-				trace("terrainConfig.typeID = " + terrainConfig.typeID);
+				//trace("terrainConfig.typeID = " + terrainConfig.typeID);
 			}
 			
 			//生成可操控的地形列表
-			var terrainList:Array = [];
+			var canEditTerrainList:Array = EditorFactory.createCanEditTerrainList();
 			
-			this.send(MainController.EDIT_CREATE_MAP, map);
+			this.send(MainController.EDIT_CREATE_MAP, map, canEditTerrainList);
 		}
 		
 		/**
@@ -111,6 +115,18 @@ package controller
 		public function read($url:String, $sourceType:String, $fileType:String, $saveToLibrary:Boolean = true, $priority:int = 0):void
 		{
 			_model.read($url, $sourceType, $fileType, $saveToLibrary, $priority);
+		}
+		
+		/**
+		 * 编辑器 设定选中地形
+		 * @param $terrainTypeID
+		 * @param $terrainSubType
+		 * 
+		 */		
+		public function editorSetSelectTerrain($terrainTypeID:String, $terrainSubType:String):void
+		{
+			ControllerLog.addLog("编辑模式选中了地形! $terrainTypeID = " + $terrainTypeID);
+			this.gameplayManager.gameplayEditor.setSelectedTerrain($terrainTypeID, $terrainSubType);
 		}
 		
 		//====================================================================================

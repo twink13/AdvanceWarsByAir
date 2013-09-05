@@ -11,8 +11,7 @@ package view.map
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	
-	import game.Game;
+	import flash.events.MouseEvent;
 	
 	import view.MainView;
 	import view.consts.ViewConsts;
@@ -34,19 +33,30 @@ package view.map
 			super();
 		}
 		
-		public function relateWithData($display:DisplayObject, $gridData:AwGirdData):void
+		public function setData($gridData:AwGirdData):void
 		{
 			_gridData = $gridData;
-			
+		}
+		
+		public function get gridData():AwGirdData
+		{
+			return _gridData;
+		}
+		
+		public override function relate($display:DisplayObject):void
+		{
 			super.relate($display);
 			
 			
 			MainView.instance.addListener(_gridData.imageUrl, onImageRead);
-			MainView.instance.read(_gridData.imageUrl, ReaderTypes.SOURCE_TYPE_LOCAL, ReaderTypes.FILE_TYPE_BMP);
+			MainView.instance.read(_gridData.imageUrl, Configer.SOURCE_TYPE_PIC, ReaderTypes.FILE_TYPE_BMP);
+			
+			this.display.addEventListener(MouseEvent.CLICK, onThisClick);
 		}
 		
 		public override function unrelate():void
 		{
+			this.display.removeEventListener(MouseEvent.CLICK, onThisClick);
 			//
 			MainView.instance.removeListener(_gridData.imageUrl, onImageRead);
 			
@@ -58,6 +68,16 @@ package view.map
 			_imageContent = null;
 			
 			super.unrelate();
+		}
+		
+		/**
+		 * 点击自身
+		 * @param $evt
+		 * 
+		 */		
+		protected function onThisClick($evt:MouseEvent):void
+		{
+			
 		}
 		
 		private function onImageRead($readerData:ReaderData):void

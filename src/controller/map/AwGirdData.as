@@ -10,7 +10,9 @@ package controller.map
 	import com.twink.tools.game.slg.map.MapData2D;
 	import com.twink.tools.game.slg.map.MapNodeData2D;
 	
+	import controller.consts.TerrainSubTypes;
 	import controller.consts.TerrainTags;
+	
 	import model.consts.Urls;
 	
 	public class AwGirdData implements IMapContent
@@ -196,6 +198,11 @@ package controller.map
 		//获得周围的相同地形状态
 		private function getAroundSame($targetTerrainTypeID:String, $otherTerrainTypeID:String):String
 		{
+			if ( !this.parent )
+			{
+				return TerrainSubTypes.NONE;
+			}
+			
 			var result:String = "";
 			var aroundNodes:Array = (this.parent as MapNodeData2D).getAround();
 			var size:int = aroundNodes.length;
