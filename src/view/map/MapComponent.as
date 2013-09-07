@@ -17,8 +17,6 @@ package view.map
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import game.Game;
-	
 	import view.MainView;
 	import view.consts.ViewConsts;
 	

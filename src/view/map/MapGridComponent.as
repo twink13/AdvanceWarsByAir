@@ -2,16 +2,21 @@ package view.map
 {
 	import com.twink.tools.UI.UI;
 	import com.twink.tools.component.Component;
+	import com.twink.tools.data.DataCell;
 	import com.twink.tools.load.Reader;
 	import com.twink.tools.load.ReaderData;
 	import com.twink.tools.load.ReaderTypes;
 	
 	import controller.map.AwGirdData;
+	import controller.map.DataCellTerrain;
 	
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	
+	import org.hamcrest.object.nullValue;
 	
 	import view.MainView;
 	import view.consts.ViewConsts;
@@ -25,8 +30,8 @@ package view.map
 	{
 		//小格数据
 		private var _gridData:AwGirdData = null;
-		//加载的图片资源
-		private var _imageContent:DisplayObject = null;
+		//图片容器
+		private var _imageContainer:UrlImageComponent = null;
 		
 		public function MapGridComponent()
 		{
@@ -47,25 +52,27 @@ package view.map
 		{
 			super.relate($display);
 			
+			//图片容器相关
+			_imageContainer = new UrlImageComponent();
+			_imageContainer.relate(this.display);
+			_imageContainer.addListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
+			_imageContainer.loadImage(_gridData.imageUrl);
 			
-			MainView.instance.addListener(_gridData.imageUrl, onImageRead);
-			MainView.instance.read(_gridData.imageUrl, Configer.SOURCE_TYPE_PIC, ReaderTypes.FILE_TYPE_BMP);
+			//数据变化相关
+			_gridData.terrainData.addListener(DataCell.UPDATE, onTerrainDataUpdate);
 			
+			//操作相关
 			this.display.addEventListener(MouseEvent.CLICK, onThisClick);
 		}
 		
 		public override function unrelate():void
 		{
+			_gridData.terrainData.removeListener(DataCell.UPDATE, onTerrainDataUpdate);
 			this.display.removeEventListener(MouseEvent.CLICK, onThisClick);
 			//
-			MainView.instance.removeListener(_gridData.imageUrl, onImageRead);
-			
-			if ( _imageContent && _imageContent.parent )
-			{
-				_imageContent.parent.removeChild(_imageContent);
-			}
-			
-			_imageContent = null;
+			_imageContainer.removeListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
+			_imageContainer.unrelate();
+			_imageContainer = null;
 			
 			super.unrelate();
 		}
@@ -77,17 +84,20 @@ package view.map
 		 */		
 		protected function onThisClick($evt:MouseEvent):void
 		{
-			
+			MainView.instance.controller.clickMapGrid(this.gridData);
 		}
 		
-		private function onImageRead($readerData:ReaderData):void
+		//图片加载完毕
+		private function onImageLoaded():void
 		{
-			MainView.instance.removeListener(_gridData.imageUrl, onImageRead);
-			_imageContent = new Bitmap($readerData.contentData.value);
-			
-			_imageContent.y = ViewConsts.PIXL_GRID_HEIGHT - _imageContent.height;
-			
-			(this.display as DisplayObjectContainer).addChild(_imageContent);
+			//修正图片位置
+			_imageContainer.imageDisplay.y = ViewConsts.PIXL_GRID_HEIGHT - _imageContainer.imageDisplay.height;
+		}
+		
+		//地形变化
+		private function onTerrainDataUpdate($terrainData:DataCellTerrain):void
+		{
+			_imageContainer.loadImage(_gridData.imageUrl);//test
 		}
 	}
 }

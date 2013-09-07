@@ -10,8 +10,6 @@ package controller.map
 	import controller.MainController;
 	import controller.config.terrain.TerrainConfigData;
 	
-	import game.Game;
-	
 	import model.consts.Urls;
 	
 	public class DataCellTerrain extends DataCell
@@ -51,6 +49,7 @@ package controller.map
 		public function set typeID($value:String):void
 		{
 			_typeID = $value;
+			this.update();
 		}
 		
 		/**
@@ -61,6 +60,7 @@ package controller.map
 		public function set subType($value:String):void
 		{
 			_subType = $value;
+			this.update();
 		}
 		
 		//=============================================================

@@ -3,6 +3,7 @@ package controller.gameplay.editor
 	import com.twink.tools.data.DataCell;
 	
 	import controller.gameplay.base.GamePlay;
+	import controller.map.AwGirdData;
 	import controller.map.DataCellTerrain;
 
 	/**
@@ -30,6 +31,17 @@ package controller.gameplay.editor
 		{
 			this.selectedTerrainTypeIDData.typeID = $terrainTypeID;
 			this.selectedTerrainTypeIDData.subType = $terrainSubType;
+		}
+		
+		/**
+		 * 点击地图上的小格
+		 * @param $gridData
+		 * 
+		 */		
+		public override function clickMapGrid($gridData:AwGirdData):void
+		{
+			//将选择的地形写入点击的地形
+			$gridData.terrainData.setUp(this.selectedTerrainTypeIDData.typeID, this.selectedTerrainTypeIDData.subType);
 		}
 	}
 }

@@ -3,6 +3,7 @@ package controller.gameplay
 	import com.twink.tools.data.DataCell;
 	
 	import controller.consts.GameModes;
+	import controller.gameplay.base.GamePlay;
 	import controller.gameplay.editor.GameplayEditor;
 
 	/**
@@ -18,6 +19,9 @@ package controller.gameplay
 		//编辑器玩法
 		public var gameplayEditor:GameplayEditor = new GameplayEditor();
 		
+		//当前选择的玩法
+		public var currentGameplay:GamePlay = gameplayEditor;
+		
 		public function GameplayManager()
 		{
 			
@@ -30,6 +34,7 @@ package controller.gameplay
 		public function enterEditorMode():void
 		{
 			this.gameModeData.value = GameModes.EDIT;
+			this.currentGameplay = gameplayEditor;
 		}
 	}
 }

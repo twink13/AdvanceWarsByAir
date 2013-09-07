@@ -10,8 +10,6 @@
 		<![CDATA[
 			import controller.MainController;
 			
-			import game.Game;
-			
 			import model.MainModel;
 			
 			import mx.controls.Alert;
@@ -22,7 +20,6 @@
 			import view.MainView;
 			
 			public var ui:UIComponent = new UIComponent();
-			public var mainGame:Game = new Game();
 			
 			private var _model:MainModel = new MainModel();
 			private var _controller:MainController = new MainController(_model);

@@ -129,6 +129,17 @@ package controller
 			this.gameplayManager.gameplayEditor.setSelectedTerrain($terrainTypeID, $terrainSubType);
 		}
 		
+		/**
+		 * 将选中的地形放入地图中
+		 * @param $grid
+		 * 
+		 */		
+		public function clickMapGrid($grid:AwGirdData):void
+		{
+			ControllerLog.addLog("编辑模式替换地形! 小格位置 = " + ($grid.parent as MapNodeData2D).position);
+			this.gameplayManager.currentGameplay.clickMapGrid($grid);
+		}
+		
 		//====================================================================================
 		//对内接口
 		//====================================================================================
