@@ -63,12 +63,14 @@ package view.map
 			
 			//操作相关
 			this.display.addEventListener(MouseEvent.CLICK, onThisClick);
+			this.display.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
 		}
 		
 		public override function unrelate():void
 		{
 			_gridData.terrainData.removeListener(DataCell.UPDATE, onTerrainDataUpdate);
 			this.display.removeEventListener(MouseEvent.CLICK, onThisClick);
+			this.display.removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
 			//
 			_imageContainer.removeListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
 			_imageContainer.unrelate();
@@ -85,6 +87,14 @@ package view.map
 		protected function onThisClick($evt:MouseEvent):void
 		{
 			MainView.instance.controller.clickMapGrid(this.gridData);
+		}
+		
+		private function onRollOver($evt:MouseEvent):void
+		{
+			if ( $evt.buttonDown )
+			{
+				MainView.instance.controller.clickMapGrid(this.gridData);
+			}
 		}
 		
 		//图片加载完毕
