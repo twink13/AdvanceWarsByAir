@@ -46,7 +46,7 @@ package controller.gameplay.editor
 		{
 			//将选择的地形写入点击的地形
 			$gridData.terrainData.setUp(this.selectedTerrainTypeIDData.typeID, this.selectedTerrainTypeIDData.subType);
-			$gridData.autoChangeSubType(true);
+			$gridData.changeSubType(true);
 		}
 	}
 }

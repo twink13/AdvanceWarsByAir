@@ -1,5 +1,10 @@
 package controller.util
 {
+	import com.twink.tools.game.slg.map.MapData2D;
+	import com.twink.tools.game.slg.map.MapNodeData2D;
+	
+	import controller.MainController;
+	import controller.config.terrain.TerrainConfigData;
 	import controller.consts.TerrainSubTypes;
 	import controller.consts.Terrains;
 	import controller.map.AwGirdData;
@@ -11,6 +16,36 @@ package controller.util
 	 */
 	public class EditorFactory
 	{
+		public static function createDefaultMap():MapData2D
+		{
+			var result:MapData2D = new MapData2D();
+			result.setUp(20, 20);
+			
+			var list:Array = result.nodeList();
+			var size:int = list.length;
+			for ( var i:int = 0; i < size; i++ )
+			{
+				var node:MapNodeData2D = list[i];
+				var grid:AwGirdData = new AwGirdData(node);
+				
+				node.content = grid;
+				
+				//随机设置一个已有的地形
+				var terrainConfig:TerrainConfigData = MainController.instance.terrainConfigParser.getRandomTerrainConfig();
+				grid.terrainData.typeID = terrainConfig.typeID;
+				//trace("terrainConfig.typeID = " + terrainConfig.typeID);
+			}
+			
+			//改变地形方向
+			for ( i = 0; i < size; i++ )
+			{
+				node = list[i];
+				grid = node.content as AwGirdData;
+				grid.changeSubType(false);
+			}
+			return result;
+		}
+		
 		/**
 		 * 生成可选择的地形列表
 		 * @return [AwGirdData列表]

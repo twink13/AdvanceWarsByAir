@@ -78,31 +78,8 @@ package controller
 			ControllerLog.addLog("进入编辑器模式! ");
 			this.gameplayManager.enterEditorMode();
 			
-			//这里先打开一个默认的UI
-			var map:MapData2D = new MapData2D();
-			map.setUp(20, 20);
-			
-			var list:Array = map.nodeList();
-			var size:int = list.length;
-			for ( var i:int = 0; i < size; i++ )
-			{
-				var node:MapNodeData2D = list[i];
-				var grid:AwGirdData = new AwGirdData(node);
-				
-				node.content = grid;
-				
-				//随机设置一个已有的地形
-				var terrainConfig:TerrainConfigData = this.terrainConfigParser.getRandomTerrainConfig();
-				grid.terrainData.typeID = terrainConfig.typeID;
-				//trace("terrainConfig.typeID = " + terrainConfig.typeID);
-			}
-			
-			for ( i = 0; i < size; i++ )
-			{
-				node = list[i];
-				grid = node.content as AwGirdData;
-				grid.autoChangeSubType(false);
-			}
+			//生成默认的地形
+			var map:MapData2D = EditorFactory.createDefaultMap();
 			
 			//生成可操控的地形列表
 			var canEditTerrainList:Array = EditorFactory.createCanEditTerrainList();

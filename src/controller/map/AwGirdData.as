@@ -72,10 +72,10 @@ package controller.map
 		}
 		
 		/**
-		 * 自动变更地形小类型
+		 * 变更地形小类型
 		 * 
 		 */		
-		public function autoChangeSubType($withAround:Boolean):void
+		public function changeSubType($withAround:Boolean):void
 		{
 			this.terrainData.subType = MapUtil.getSubTypeByGrid(this);
 			
@@ -86,7 +86,7 @@ package controller.map
 				{
 					if ( mapData2D )
 					{
-						(mapData2D.content as AwGirdData).autoChangeSubType(false);
+						(mapData2D.content as AwGirdData).changeSubType(false);
 					}
 				}
 			}

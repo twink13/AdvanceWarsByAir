@@ -27,7 +27,8 @@ package controller.util
 				var node:MapNodeData2D = aroundNodes[i];
 				if ( !node )
 				{
-					result += "1";
+					//地图边缘是否连接外部
+					result += "0";//原先是1
 					continue;
 				}
 				
