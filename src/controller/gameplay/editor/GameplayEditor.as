@@ -2,6 +2,8 @@ package controller.gameplay.editor
 {
 	import com.twink.tools.data.DataCell;
 	
+	import controller.consts.TerrainSubTypes;
+	import controller.consts.Terrains;
 	import controller.gameplay.base.GamePlay;
 	import controller.map.AwGirdData;
 	import controller.map.DataCellTerrain;
@@ -19,6 +21,9 @@ package controller.gameplay.editor
 		public function GameplayEditor()
 		{
 			super();
+			
+			//默认
+			this.setSelectedTerrain(Terrains.PLAIN, TerrainSubTypes.NONE);
 		}
 		
 		/**
@@ -29,8 +34,7 @@ package controller.gameplay.editor
 		 */		
 		public function setSelectedTerrain($terrainTypeID:String, $terrainSubType:String):void
 		{
-			this.selectedTerrainTypeIDData.typeID = $terrainTypeID;
-			this.selectedTerrainTypeIDData.subType = $terrainSubType;
+			selectedTerrainTypeIDData.setUp($terrainTypeID, $terrainSubType);
 		}
 		
 		/**
