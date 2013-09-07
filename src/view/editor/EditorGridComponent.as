@@ -5,14 +5,14 @@ package view.editor
 	import flash.events.MouseEvent;
 	
 	import view.MainView;
-	import view.map.MapGridComponent;
+	import view.map.GridComponent;
 
 	/**
 	 * created by twink @ 2013-9-5 下午5:00:38
 	 * <p>
 	 * 专门用于编辑器的小格
 	 */
-	public class EditorGridComponent extends MapGridComponent
+	public class EditorGridComponent extends GridComponent
 	{
 		public function EditorGridComponent()
 		{

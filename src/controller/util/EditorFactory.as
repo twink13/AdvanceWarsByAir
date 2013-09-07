@@ -23,6 +23,15 @@ package controller.util
 			result.push(createTerrainGrid(Terrains.PLAIN, TerrainSubTypes.NONE));
 			result.push(createTerrainGrid(Terrains.MOUNTAIN, TerrainSubTypes.NONE));
 			result.push(createTerrainGrid(Terrains.SEA, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.WOOD, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.ROAD, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.RIVER, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.BRIDGE, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.SHOAL, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.REEF, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.PIPE, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.MISSILE, TerrainSubTypes.NONE));
+			result.push(createTerrainGrid(Terrains.PIPESEAM, TerrainSubTypes.NONE));
 			
 			return result;
 		}

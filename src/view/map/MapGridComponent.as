@@ -26,55 +26,23 @@ package view.map
 	 * <p>
 	 * 地图小格UI
 	 */
-	public class MapGridComponent extends Component
+	public class MapGridComponent extends GridComponent
 	{
-		//小格数据
-		private var _gridData:AwGirdData = null;
-		//图片容器
-		private var _imageContainer:UrlImageComponent = null;
-		
 		public function MapGridComponent()
 		{
 			super();
-		}
-		
-		public function setData($gridData:AwGirdData):void
-		{
-			_gridData = $gridData;
-		}
-		
-		public function get gridData():AwGirdData
-		{
-			return _gridData;
 		}
 		
 		public override function relate($display:DisplayObject):void
 		{
 			super.relate($display);
 			
-			//图片容器相关
-			_imageContainer = new UrlImageComponent();
-			_imageContainer.relate(this.display);
-			_imageContainer.addListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
-			_imageContainer.loadImage(_gridData.imageUrl);
-			
-			//数据变化相关
-			_gridData.terrainData.addListener(DataCell.UPDATE, onTerrainDataUpdate);
-			
-			//操作相关
-			this.display.addEventListener(MouseEvent.CLICK, onThisClick);
 			this.display.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
 		}
 		
 		public override function unrelate():void
 		{
-			_gridData.terrainData.removeListener(DataCell.UPDATE, onTerrainDataUpdate);
-			this.display.removeEventListener(MouseEvent.CLICK, onThisClick);
 			this.display.removeEventListener(MouseEvent.ROLL_OVER, onRollOver);
-			//
-			_imageContainer.removeListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
-			_imageContainer.unrelate();
-			_imageContainer = null;
 			
 			super.unrelate();
 		}
@@ -84,7 +52,7 @@ package view.map
 		 * @param $evt
 		 * 
 		 */		
-		protected function onThisClick($evt:MouseEvent):void
+		protected override function onThisClick($evt:MouseEvent):void
 		{
 			MainView.instance.controller.clickMapGrid(this.gridData);
 		}
@@ -95,19 +63,6 @@ package view.map
 			{
 				MainView.instance.controller.clickMapGrid(this.gridData);
 			}
-		}
-		
-		//图片加载完毕
-		private function onImageLoaded():void
-		{
-			//修正图片位置
-			_imageContainer.imageDisplay.y = ViewConsts.PIXL_GRID_HEIGHT - _imageContainer.imageDisplay.height;
-		}
-		
-		//地形变化
-		private function onTerrainDataUpdate($terrainData:DataCellTerrain):void
-		{
-			_imageContainer.loadImage(_gridData.imageUrl);//test
 		}
 	}
 }
