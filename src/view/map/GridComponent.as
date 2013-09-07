@@ -46,7 +46,7 @@ package view.map
 			_imageContainer = new UrlImageComponent();
 			_imageContainer.relate(this.display);
 			_imageContainer.addListener(UrlImageComponent.IMAGE_LOADED, onImageLoaded);
-			_imageContainer.loadImage(_gridData.imageUrl);
+			_imageContainer.loadImage(_gridData.terrainData.imageUrl);
 			
 			//数据变化相关
 			_gridData.terrainData.addListener(DataCell.UPDATE, onTerrainDataUpdate);
@@ -87,7 +87,7 @@ package view.map
 		//地形变化
 		private function onTerrainDataUpdate($terrainData:DataCellTerrain):void
 		{
-			_imageContainer.loadImage(_gridData.imageUrl);//test
+			_imageContainer.loadImage(_gridData.terrainData.imageUrl);//test
 		}
 	}
 }

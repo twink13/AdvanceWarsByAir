@@ -31,6 +31,6 @@ package controller.consts
 		
 		//其他
 		public static const CROSS_ULDR:String 	= "1111";	//
-		public static const NONE:String 	= "0000";	//
+		public static const DEFAULT:String 		= "0000";	//
 	}
 }

@@ -23,7 +23,7 @@ package controller.gameplay.editor
 			super();
 			
 			//默认
-			this.setSelectedTerrain(Terrains.PLAIN, TerrainSubTypes.NONE);
+			this.setSelectedTerrain(Terrains.PLAIN, TerrainSubTypes.DEFAULT);
 		}
 		
 		/**
@@ -46,6 +46,7 @@ package controller.gameplay.editor
 		{
 			//将选择的地形写入点击的地形
 			$gridData.terrainData.setUp(this.selectedTerrainTypeIDData.typeID, this.selectedTerrainTypeIDData.subType);
+			$gridData.autoChangeSubType(true);
 		}
 	}
 }

@@ -97,6 +97,13 @@ package controller
 				//trace("terrainConfig.typeID = " + terrainConfig.typeID);
 			}
 			
+			for ( i = 0; i < size; i++ )
+			{
+				node = list[i];
+				grid = node.content as AwGirdData;
+				grid.autoChangeSubType(false);
+			}
+			
 			//生成可操控的地形列表
 			var canEditTerrainList:Array = EditorFactory.createCanEditTerrainList();
 			
